@@ -331,17 +331,17 @@ public class FutureAnnuity extends javax.swing.JFrame {
         
         // Read inputs and store them in above variables
         payment = Float.parseFloat(paymentJTextField.getText());
-        interest = rateJSpinner.getValue();
+        //interest = rateJSpinner.getValue();
         compounds = Float.parseFloat(numberOfPaymentsJTextField.getText());
         years = Float.parseFloat(yearsJTextField.getText());
         
         // Calculate
-        interestTotal = 1 + interest / compounds - 1;
-        annuity = payment * (1 + (interest / compounds) - 1) / (interest / compounds);
+        //interestTotal = 1 + interest / compounds - 1;
+        //annuity = payment * (1 + (interest / compounds) - 1) / (interest / compounds);
         
         // Display annuity in output fields
-        annuityJTextField.setText(twoDecimals.format(annuity));
-        interestJTextField.setText(twoDecimals.format(interestTotal));
+        //annuityJTextField.setText(twoDecimals.format(annuity));
+        //interestJTextField.setText(twoDecimals.format(interestTotal));
         
         
         
