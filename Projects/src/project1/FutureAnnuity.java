@@ -5,20 +5,60 @@
  */
 package project1;
 
+import java.awt.Color;
+import java.awt.Dialog;
 import java.text.DecimalFormat;
+import javax.swing.JColorChooser;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 /**
- *
- * @author Koenn
+ *  ADD
+ *  <p>
+ *  Environment:    PC, Windows 10, JDK 1.8.0_151, NetBeans 8.2
+ *  <p>
+ *  Date:           1/15/2018 
+ *  <p>
+ *  History Log:    1/5/2018
+ *  <p>
+ *  @author         Koenn Becker
+ *  @version        1.0.0
  */
 public class FutureAnnuity extends javax.swing.JFrame {
+
 
     /**
      * Creates new form FutureAnnuity
      */
     public FutureAnnuity() {
         initComponents();
+        
+        this.setLocationRelativeTo(null);       // Centers forms
+        aboutJDialog.setLocationRelativeTo(null);       // Centers JDialog
+        aboutJDialog.getRootPane().setDefaultButton(closeJButton);
+        this.getRootPane().setDefaultButton(calculateJButton); // Sets default button to calculate
+        
+        // Sets focused field
+        paymentJTextField.requestFocus();
+
     }
+    
+    private void clearFields(){
+        // Clears all text fields
+        paymentJTextField.setText("");
+        interestJSpinner.setValue(0.00);
+        compoundsJTextField.setText("");
+        yearsJTextField.setText("");
+        annuityJTextField.setText("");
+        paymentTotalJTextField.setText("");
+        interestTotalJTextField.setText("");
+        
+        // Resets focus to payment field
+        paymentJTextField.requestFocus();
+    }
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,62 +69,179 @@ public class FutureAnnuity extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialog1 = new javax.swing.JDialog();
-        jLabel1 = new javax.swing.JLabel();
+        aboutJDialog = new javax.swing.JDialog();
+        aboutJLabel = new javax.swing.JLabel();
+        descriptionJLabel = new javax.swing.JLabel();
+        detailsJLabel = new javax.swing.JLabel();
+        formulaPicJLabel = new javax.swing.JLabel();
+        closeJButton = new javax.swing.JButton();
+        settingsJDialog = new javax.swing.JDialog();
+        settingsJLabel = new javax.swing.JLabel();
+        closeSettingsJButton = new javax.swing.JButton();
+        colorJButton = new javax.swing.JButton();
         inputJPanel = new javax.swing.JPanel();
         paymentJLabel = new javax.swing.JLabel();
         paymentJTextField = new javax.swing.JTextField();
-        rateJLabel = new javax.swing.JLabel();
-        rateJSpinner = new javax.swing.JSpinner();
-        numberOfPaymentsLabel = new javax.swing.JLabel();
-        numberOfPaymentsJTextField = new javax.swing.JTextField();
+        interestJLabel = new javax.swing.JLabel();
+        interestJSpinner = new javax.swing.JSpinner();
+        compoundsJLabel = new javax.swing.JLabel();
+        compoundsJTextField = new javax.swing.JTextField();
         yearsJLabel = new javax.swing.JLabel();
         yearsJTextField = new javax.swing.JTextField();
         outputJPanel = new javax.swing.JPanel();
         annuityJLabel = new javax.swing.JLabel();
         annuityJTextField = new javax.swing.JTextField();
-        totalPayJLabel = new javax.swing.JLabel();
-        totalPayJTextField = new javax.swing.JTextField();
-        interestJLabel = new javax.swing.JLabel();
-        interestJTextField = new javax.swing.JTextField();
+        paymentTotalJLabel = new javax.swing.JLabel();
+        paymentTotalJTextField = new javax.swing.JTextField();
+        interestTotalJLabel = new javax.swing.JLabel();
+        interestTotalJTextField = new javax.swing.JTextField();
         calculateJButton = new javax.swing.JButton();
         buttonsJPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        clearJButton = new javax.swing.JButton();
+        printJButton = new javax.swing.JButton();
+        quitJButton = new javax.swing.JButton();
         JMenuBar = new javax.swing.JMenuBar();
         fileJMenu = new javax.swing.JMenu();
         clearJMenuItem = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        printJMenuItem = new javax.swing.JMenuItem();
+        quitJMenuItem = new javax.swing.JMenuItem();
+        settingsJMenuItem = new javax.swing.JMenuItem();
         helpJMenu = new javax.swing.JMenu();
         aboutJMenuItem = new javax.swing.JMenuItem();
 
-        jLabel1.setText("About");
+        aboutJDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        aboutJDialog.setTitle("About -- Annuity Calculator");
+        aboutJDialog.setBackground(new java.awt.Color(255, 255, 255));
+        aboutJDialog.setIconImage(null);
+        aboutJDialog.setPreferredSize(new java.awt.Dimension(416, 510));
+        aboutJDialog.setResizable(false);
+        aboutJDialog.setSize(new java.awt.Dimension(416, 510));
+        aboutJDialog.setType(java.awt.Window.Type.UTILITY);
 
-        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
-        jDialog1.getContentPane().setLayout(jDialog1Layout);
-        jDialog1Layout.setHorizontalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog1Layout.createSequentialGroup()
-                .addContainerGap(189, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(182, 182, 182))
+        aboutJLabel.setFont(new java.awt.Font("Helvetica", 1, 36)); // NOI18N
+        aboutJLabel.setText("About");
+
+        descriptionJLabel.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        descriptionJLabel.setText("<html>This program calculates the annuity of an account that has a fixed interest rate. You can enter the payment you will deposit each compound, the interest rate of your account, the number of compounds a year, and the number of years you plan on continuing this plan. Below is the formula used in this calculation:</html>");
+
+        detailsJLabel.setText("<html><h3>Version: 1.0.0</h3><h3>Developed by: Koenn Becker - 2018</h3></html>");
+
+        formulaPicJLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project1/formula1.png"))); // NOI18N
+        formulaPicJLabel.setPreferredSize(new java.awt.Dimension(272, 189));
+        formulaPicJLabel.setRequestFocusEnabled(false);
+
+        closeJButton.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        closeJButton.setMnemonic('R');
+        closeJButton.setText("Close");
+        closeJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeJButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout aboutJDialogLayout = new javax.swing.GroupLayout(aboutJDialog.getContentPane());
+        aboutJDialog.getContentPane().setLayout(aboutJDialogLayout);
+        aboutJDialogLayout.setHorizontalGroup(
+            aboutJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(aboutJDialogLayout.createSequentialGroup()
+                .addGap(156, 156, 156)
+                .addComponent(aboutJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(166, 166, 166))
+            .addGroup(aboutJDialogLayout.createSequentialGroup()
+                .addGroup(aboutJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(aboutJDialogLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(aboutJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(aboutJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(descriptionJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(detailsJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE))
+                            .addComponent(formulaPicJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(aboutJDialogLayout.createSequentialGroup()
+                        .addGap(162, 162, 162)
+                        .addComponent(closeJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jDialog1Layout.setVerticalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog1Layout.createSequentialGroup()
+        aboutJDialogLayout.setVerticalGroup(
+            aboutJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(aboutJDialogLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jLabel1)
-                .addContainerGap(257, Short.MAX_VALUE))
+                .addComponent(aboutJLabel)
+                .addGap(18, 18, 18)
+                .addComponent(descriptionJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(formulaPicJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(detailsJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(closeJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
+        );
+
+        settingsJDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        settingsJDialog.setTitle("About -- Annuity Calculator");
+        settingsJDialog.setBackground(new java.awt.Color(255, 255, 255));
+        settingsJDialog.setIconImage(null);
+        settingsJDialog.setPreferredSize(new java.awt.Dimension(416, 510));
+        settingsJDialog.setResizable(false);
+        settingsJDialog.setSize(new java.awt.Dimension(416, 510));
+        settingsJDialog.setType(java.awt.Window.Type.UTILITY);
+
+        settingsJLabel.setFont(new java.awt.Font("Helvetica", 1, 36)); // NOI18N
+        settingsJLabel.setText("Settings");
+
+        closeSettingsJButton.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        closeSettingsJButton.setMnemonic('R');
+        closeSettingsJButton.setText("Close");
+        closeSettingsJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeSettingsJButtonActionPerformed(evt);
+            }
+        });
+
+        colorJButton.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        colorJButton.setText("Change Color Scheme");
+        colorJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                colorJButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout settingsJDialogLayout = new javax.swing.GroupLayout(settingsJDialog.getContentPane());
+        settingsJDialog.getContentPane().setLayout(settingsJDialogLayout);
+        settingsJDialogLayout.setHorizontalGroup(
+            settingsJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(settingsJDialogLayout.createSequentialGroup()
+                .addGroup(settingsJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(settingsJDialogLayout.createSequentialGroup()
+                        .addGap(162, 162, 162)
+                        .addComponent(closeSettingsJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(settingsJDialogLayout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(settingsJLabel))
+                    .addGroup(settingsJDialogLayout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(colorJButton)))
+                .addContainerGap(127, Short.MAX_VALUE))
+        );
+        settingsJDialogLayout.setVerticalGroup(
+            settingsJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(settingsJDialogLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(settingsJLabel)
+                .addGap(43, 43, 43)
+                .addComponent(colorJButton)
+                .addGap(301, 301, 301)
+                .addComponent(closeSettingsJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Future Annuity");
         setBackground(new java.awt.Color(0, 0, 0));
+        setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         setResizable(false);
 
-        inputJPanel.setBackground(new java.awt.Color(255, 102, 0));
+        inputJPanel.setBackground(new java.awt.Color(229, 152, 88));
         inputJPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         inputJPanel.setLayout(new java.awt.GridLayout(4, 3, 10, 17));
 
@@ -93,41 +250,32 @@ public class FutureAnnuity extends javax.swing.JFrame {
         paymentJLabel.setText("Periodic Payment:");
         inputJPanel.add(paymentJLabel);
 
-        paymentJTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                paymentJTextFieldActionPerformed(evt);
-            }
-        });
+        paymentJTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         inputJPanel.add(paymentJTextField);
 
-        rateJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        rateJLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        rateJLabel.setText("Interest (as a %):");
-        inputJPanel.add(rateJLabel);
-        inputJPanel.add(rateJSpinner);
+        interestJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        interestJLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        interestJLabel.setText("Interest (as a %):");
+        inputJPanel.add(interestJLabel);
 
-        numberOfPaymentsLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        numberOfPaymentsLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        numberOfPaymentsLabel.setText("Compunds per year:");
-        inputJPanel.add(numberOfPaymentsLabel);
+        interestJSpinner.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 1.0d));
+        interestJSpinner.setEditor(new javax.swing.JSpinner.NumberEditor(interestJSpinner, "0.00"));
+        inputJPanel.add(interestJSpinner);
 
-        numberOfPaymentsJTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numberOfPaymentsJTextFieldActionPerformed(evt);
-            }
-        });
-        inputJPanel.add(numberOfPaymentsJTextField);
+        compoundsJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        compoundsJLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        compoundsJLabel.setText("Compunds per year:");
+        inputJPanel.add(compoundsJLabel);
+
+        compoundsJTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        inputJPanel.add(compoundsJTextField);
 
         yearsJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         yearsJLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         yearsJLabel.setText("Years:");
         inputJPanel.add(yearsJLabel);
 
-        yearsJTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yearsJTextFieldActionPerformed(evt);
-            }
-        });
+        yearsJTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         inputJPanel.add(yearsJTextField);
 
         outputJPanel.setLayout(new java.awt.GridLayout(3, 2, 10, 15));
@@ -138,40 +286,28 @@ public class FutureAnnuity extends javax.swing.JFrame {
         outputJPanel.add(annuityJLabel);
 
         annuityJTextField.setEditable(false);
-        annuityJTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                annuityJTextFieldActionPerformed(evt);
-            }
-        });
+        annuityJTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         outputJPanel.add(annuityJTextField);
 
-        totalPayJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        totalPayJLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        totalPayJLabel.setText("Total Payments:");
-        outputJPanel.add(totalPayJLabel);
+        paymentTotalJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        paymentTotalJLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        paymentTotalJLabel.setText("Total Payments:");
+        outputJPanel.add(paymentTotalJLabel);
 
-        totalPayJTextField.setEditable(false);
-        totalPayJTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                totalPayJTextFieldActionPerformed(evt);
-            }
-        });
-        outputJPanel.add(totalPayJTextField);
+        paymentTotalJTextField.setEditable(false);
+        paymentTotalJTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        outputJPanel.add(paymentTotalJTextField);
 
-        interestJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        interestJLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        interestJLabel.setText("Interest Earned:");
-        outputJPanel.add(interestJLabel);
+        interestTotalJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        interestTotalJLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        interestTotalJLabel.setText("Interest Earned:");
+        outputJPanel.add(interestTotalJLabel);
 
-        interestJTextField.setEditable(false);
-        interestJTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                interestJTextFieldActionPerformed(evt);
-            }
-        });
-        outputJPanel.add(interestJTextField);
+        interestTotalJTextField.setEditable(false);
+        interestTotalJTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        outputJPanel.add(interestTotalJTextField);
 
-        calculateJButton.setBackground(new java.awt.Color(255, 204, 153));
+        calculateJButton.setBackground(new java.awt.Color(232, 104, 0));
         calculateJButton.setFont(new java.awt.Font("Alcubierre", 0, 18)); // NOI18N
         calculateJButton.setMnemonic('C');
         calculateJButton.setText("Calculate");
@@ -183,41 +319,39 @@ public class FutureAnnuity extends javax.swing.JFrame {
 
         buttonsJPanel.setLayout(new java.awt.GridLayout(1, 3, 20, 0));
 
-        jButton1.setFont(new java.awt.Font("Alcubierre", 0, 18)); // NOI18N
-        jButton1.setMnemonic('R');
-        jButton1.setText("Clear");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        clearJButton.setBackground(new java.awt.Color(239, 197, 162));
+        clearJButton.setFont(new java.awt.Font("Alcubierre", 0, 18)); // NOI18N
+        clearJButton.setMnemonic('R');
+        clearJButton.setText("Clear");
+        clearJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                clearJButtonActionPerformed(evt);
             }
         });
-        buttonsJPanel.add(jButton1);
+        buttonsJPanel.add(clearJButton);
 
-        jButton2.setFont(new java.awt.Font("Alcubierre", 0, 18)); // NOI18N
-        jButton2.setMnemonic('P');
-        jButton2.setText("Print");
-        jButton2.setEnabled(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        buttonsJPanel.add(jButton2);
+        printJButton.setFont(new java.awt.Font("Alcubierre", 0, 18)); // NOI18N
+        printJButton.setMnemonic('P');
+        printJButton.setText("Print");
+        printJButton.setEnabled(false);
+        buttonsJPanel.add(printJButton);
 
-        jButton3.setFont(new java.awt.Font("Alcubierre", 0, 18)); // NOI18N
-        jButton3.setMnemonic('Q');
-        jButton3.setText("Quit");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        quitJButton.setBackground(new java.awt.Color(239, 197, 162));
+        quitJButton.setFont(new java.awt.Font("Alcubierre", 0, 18)); // NOI18N
+        quitJButton.setMnemonic('Q');
+        quitJButton.setText("Quit");
+        quitJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                quitJButtonActionPerformed(evt);
             }
         });
-        buttonsJPanel.add(jButton3);
+        buttonsJPanel.add(quitJButton);
 
         fileJMenu.setMnemonic('F');
         fileJMenu.setText("File");
         fileJMenu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
+        clearJMenuItem.setMnemonic('C');
         clearJMenuItem.setText("Clear");
         clearJMenuItem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         clearJMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -227,19 +361,30 @@ public class FutureAnnuity extends javax.swing.JFrame {
         });
         fileJMenu.add(clearJMenuItem);
 
-        jMenuItem1.setMnemonic('P');
-        jMenuItem1.setText("Print");
-        jMenuItem1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        fileJMenu.add(jMenuItem1);
+        printJMenuItem.setMnemonic('P');
+        printJMenuItem.setText("Print");
+        printJMenuItem.setEnabled(false);
+        printJMenuItem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        fileJMenu.add(printJMenuItem);
 
-        jMenuItem2.setMnemonic('Q');
-        jMenuItem2.setText("Quit");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        quitJMenuItem.setMnemonic('Q');
+        quitJMenuItem.setText("Quit");
+        quitJMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                quitJMenuItemActionPerformed(evt);
             }
         });
-        fileJMenu.add(jMenuItem2);
+        fileJMenu.add(quitJMenuItem);
+
+        settingsJMenuItem.setMnemonic('C');
+        settingsJMenuItem.setText("Settings");
+        settingsJMenuItem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        settingsJMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                settingsJMenuItemActionPerformed(evt);
+            }
+        });
+        fileJMenu.add(settingsJMenuItem);
 
         JMenuBar.add(fileJMenu);
 
@@ -291,84 +436,87 @@ public class FutureAnnuity extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void clearJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearJMenuItemActionPerformed
-        // TODO add your handling code here:
+        // Clears all text fields
+        clearFields();
     }//GEN-LAST:event_clearJMenuItemActionPerformed
 
     private void aboutJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutJMenuItemActionPerformed
-        // TODO add your handling code here:
+        aboutJDialog.setVisible(true);
+        
     }//GEN-LAST:event_aboutJMenuItemActionPerformed
-
-    private void paymentJTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentJTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_paymentJTextFieldActionPerformed
-
-    private void numberOfPaymentsJTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberOfPaymentsJTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_numberOfPaymentsJTextFieldActionPerformed
-
-    private void yearsJTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearsJTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_yearsJTextFieldActionPerformed
-
-    private void annuityJTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annuityJTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_annuityJTextFieldActionPerformed
-
-    private void interestJTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interestJTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_interestJTextFieldActionPerformed
-
-    private void totalPayJTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalPayJTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_totalPayJTextFieldActionPerformed
 
     private void calculateJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateJButtonActionPerformed
         // Reads inputs and stores them in variables, then applies the future annuity formula and displays the results
         
-        // Variable declaration
-        DecimalFormat twoDecimals = new DecimalFormat("#,##0.00");
-        float payment, interest, interestTotal, compounds, years, annuity;
-        
-        // Read inputs and store them in above variables
-        payment = Float.parseFloat(paymentJTextField.getText());
-        //interest = rateJSpinner.getValue();
-        compounds = Float.parseFloat(numberOfPaymentsJTextField.getText());
-        years = Float.parseFloat(yearsJTextField.getText());
-        
-        // Calculate
-        //interestTotal = 1 + interest / compounds - 1;
-        //annuity = payment * (1 + (interest / compounds) - 1) / (interest / compounds);
+        // Reads input fields and stores values in variables
+        DecimalFormat moneyFormat = new DecimalFormat("$#,##0.00"); // Creates decimal format for money
+        double payment = Float.parseFloat(paymentJTextField.getText());
+        double interest = (Double) interestJSpinner.getValue() / 100; // Casts value of spinner into double and then divides by 100 to get decimal
+        short compounds = Short.parseShort(compoundsJTextField.getText());
+        double years = Float.parseFloat(yearsJTextField.getText());
+
+        // Calculate annuity
+        double annuity = payment * (Math.pow(1 + (interest / compounds), years * compounds) - 1) /
+                (interest / compounds);
+        // Calculates total payments made
+        double paymentTotal = payment * (compounds * years);
+        // Calculates the total interest earned by subtracting the total amount of payments from the annuity balance
+        double interestTotal = annuity - paymentTotal;
         
         // Display annuity in output fields
-        //annuityJTextField.setText(twoDecimals.format(annuity));
-        //interestJTextField.setText(twoDecimals.format(interestTotal));
+        annuityJTextField.setText(moneyFormat.format(annuity));
+        paymentTotalJTextField.setText(moneyFormat.format(paymentTotal));
+        interestTotalJTextField.setText(moneyFormat.format(interestTotal));
         
-        
-        
-        
+   
     }//GEN-LAST:event_calculateJButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void clearJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearJButtonActionPerformed
+        // Clears all text fields
+       clearFields();
+    }//GEN-LAST:event_clearJButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void quitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitJButtonActionPerformed
         // Quits the application
         System.exit(0);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_quitJButtonActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void quitJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitJMenuItemActionPerformed
          // Quits the application
         System.exit(0);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_quitJMenuItemActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void closeJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeJButtonActionPerformed
+        // Closes About dialog box
+        aboutJDialog.dispose();
+    }//GEN-LAST:event_closeJButtonActionPerformed
+
+    private void settingsJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsJMenuItemActionPerformed
+        settingsJDialog.setVisible(true);
+    }//GEN-LAST:event_settingsJMenuItemActionPerformed
+
+    private void closeSettingsJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeSettingsJButtonActionPerformed
+        settingsJDialog.dispose();
+    }//GEN-LAST:event_closeSettingsJButtonActionPerformed
+
+    private void colorJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJButtonActionPerformed
+        Color newColor = JColorChooser.showDialog(settingsJDialog, "Choose a color", inputJPanel.getBackground());
+        if (newColor != null){
+            inputJPanel.setBackground(newColor);
+            calculateJButton.setBackground(newColor);
+            clearJButton.setBackground(newColor);
+            quitJButton.setBackground(newColor);
+            
+        }
+    }//GEN-LAST:event_colorJButtonActionPerformed
+
+    /**        
+     *  Method         main()    
+     *  Description:   Creates new {@link #loanGUI()} object and sets it to visible.
+     *  @param         args Unused.     
+     *  @author        Koenn Becker   
+     *  Date Created:  1/10/2018  
+     */ 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -396,6 +544,14 @@ public class FutureAnnuity extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
+                // Halts the running thread for length of splash screen gif in milliseconds
+                try {
+                    Thread.sleep(1400);
+                }
+                catch(InterruptedException e) {
+                }
+                
                 new FutureAnnuity().setVisible(true);
             }
         });
@@ -403,33 +559,42 @@ public class FutureAnnuity extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar JMenuBar;
+    private javax.swing.JDialog aboutJDialog;
+    private javax.swing.JLabel aboutJLabel;
     private javax.swing.JMenuItem aboutJMenuItem;
     private javax.swing.JLabel annuityJLabel;
     private javax.swing.JTextField annuityJTextField;
     private javax.swing.JPanel buttonsJPanel;
     private javax.swing.JButton calculateJButton;
+    private javax.swing.JButton clearJButton;
     private javax.swing.JMenuItem clearJMenuItem;
+    private javax.swing.JButton closeJButton;
+    private javax.swing.JButton closeSettingsJButton;
+    private javax.swing.JButton colorJButton;
+    private javax.swing.JLabel compoundsJLabel;
+    private javax.swing.JTextField compoundsJTextField;
+    private javax.swing.JLabel descriptionJLabel;
+    private javax.swing.JLabel detailsJLabel;
     private javax.swing.JMenu fileJMenu;
+    private javax.swing.JLabel formulaPicJLabel;
     private javax.swing.JMenu helpJMenu;
     private javax.swing.JPanel inputJPanel;
     private javax.swing.JLabel interestJLabel;
-    private javax.swing.JTextField interestJTextField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JDialog jDialog1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JTextField numberOfPaymentsJTextField;
-    private javax.swing.JLabel numberOfPaymentsLabel;
+    private javax.swing.JSpinner interestJSpinner;
+    private javax.swing.JLabel interestTotalJLabel;
+    private javax.swing.JTextField interestTotalJTextField;
     private javax.swing.JPanel outputJPanel;
     private javax.swing.JLabel paymentJLabel;
     private javax.swing.JTextField paymentJTextField;
-    private javax.swing.JLabel rateJLabel;
-    private javax.swing.JSpinner rateJSpinner;
-    private javax.swing.JLabel totalPayJLabel;
-    private javax.swing.JTextField totalPayJTextField;
+    private javax.swing.JLabel paymentTotalJLabel;
+    private javax.swing.JTextField paymentTotalJTextField;
+    private javax.swing.JButton printJButton;
+    private javax.swing.JMenuItem printJMenuItem;
+    private javax.swing.JButton quitJButton;
+    private javax.swing.JMenuItem quitJMenuItem;
+    private javax.swing.JDialog settingsJDialog;
+    private javax.swing.JLabel settingsJLabel;
+    private javax.swing.JMenuItem settingsJMenuItem;
     private javax.swing.JLabel yearsJLabel;
     private javax.swing.JTextField yearsJTextField;
     // End of variables declaration//GEN-END:variables
