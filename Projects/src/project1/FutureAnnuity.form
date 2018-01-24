@@ -12,9 +12,12 @@
         <Property name="iconImage" type="java.awt.Image" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="null"/>
         </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[426, 600]"/>
+        </Property>
         <Property name="resizable" type="boolean" value="false"/>
         <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[416, 510]"/>
+          <Dimension value="[426, 600]"/>
         </Property>
         <Property name="type" type="java.awt.Window$Type" editor="org.netbeans.modules.form.editors.EnumEditor">
           <Value id="UTILITY"/>
@@ -62,8 +65,8 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="detailsJLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="closeJButton" pref="58" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Component id="closeJButton" min="-2" pref="43" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -83,14 +86,14 @@
         <Component class="javax.swing.JLabel" name="descriptionJLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="15" style="0"/>
+              <Font name="Arial" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;This program calculates the annuity of an account that has a fixed interest rate. You can enter the payment you will deposit each compound, the interest rate of your account, the number of compounds a year, and the number of years you plan on continuing this plan. Below is the formula used in this calculation:&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;This program calculates the annuity of an account that has a fixed interest rate. You can enter the payment you will deposit each period, the interest rate of your account, the number of compounds a year, and the number of years you plan on accumulating the annuity. Below is the formula used in this calculation:&lt;/html&gt;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="detailsJLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;h3&gt;Version: 1.0.0&lt;/h3&gt;&lt;h3&gt;Developed by: Koenn Becker - 2018&lt;/h3&gt;&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;h2&gt;Version: 1.0.0&lt;/h2&gt;&lt;h2&gt;Developed by: Koenn Becker - 2018&lt;/h2&gt;&lt;/html&gt;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="formulaPicJLabel">
@@ -318,18 +321,18 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="logoJLabel" alignment="1" pref="0" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="logoJLabel" pref="0" max="32767" attributes="0"/>
                   <Component id="outputJPanel" alignment="1" max="32767" attributes="0"/>
                   <Component id="calculateJButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="buttonsJPanel" alignment="1" max="32767" attributes="0"/>
-                  <Component id="inputJPanel" alignment="0" max="32767" attributes="0"/>
                   <Component id="errorJLabel" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
+          <Component id="inputJPanel" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -382,7 +385,7 @@
         <Component class="javax.swing.JLabel" name="paymentJLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Helvetica Neue" size="18" style="0"/>
+              <Font name="Helvetica Neue" size="20" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="Periodic Payment:"/>
@@ -390,14 +393,19 @@
         </Component>
         <Component class="javax.swing.JTextField" name="paymentJTextField">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="16" style="0"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="toolTipText" type="java.lang.String" value="Must be greater than 0 "/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;Must be greater than 0 and less than &quot; + MAX_PAYMENT" type="code"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="interestJLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Helvetica Neue" size="18" style="0"/>
+              <Font name="Helvetica Neue" size="20" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="Interest (as a %):"/>
@@ -405,6 +413,9 @@
         </Component>
         <Component class="javax.swing.JSpinner" name="interestJSpinner">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="16" style="0"/>
+            </Property>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="0.0" maximum="100.0" minimum="0.0" numberType="java.lang.Double" stepSize="1.0" type="number"/>
             </Property>
@@ -417,7 +428,7 @@
         <Component class="javax.swing.JLabel" name="compoundsJLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Helvetica Neue" size="18" style="0"/>
+              <Font name="Helvetica Neue" size="20" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="Compunds per year:"/>
@@ -425,16 +436,19 @@
         </Component>
         <Component class="javax.swing.JTextField" name="compoundsJTextField">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="16" style="0"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;Must be between 1 and &quot; + Validation.MAX_COMPOUNDINGS" type="code"/>
+              <Connection code="&quot;Must be between 1 and &quot; + MAX_COMPOUNDINGS" type="code"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="yearsJLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Helvetica Neue" size="18" style="0"/>
+              <Font name="Helvetica Neue" size="20" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="Years:"/>
@@ -442,6 +456,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="yearsJTextField">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="16" style="0"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="toolTipText" type="java.lang.String" value="How many years the annuity will accumulate"/>
           </Properties>
@@ -449,6 +466,13 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="outputJPanel">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+            <BevelBorder bevelType="1"/>
+          </Border>
+        </Property>
+      </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
         <Property name="columns" type="int" value="2"/>
@@ -460,7 +484,7 @@
         <Component class="javax.swing.JLabel" name="annuityJLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Helvetica Neue" size="18" style="0"/>
+              <Font name="Helvetica Neue" size="20" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="Future Annuity Balance:"/>
@@ -469,13 +493,16 @@
         <Component class="javax.swing.JTextField" name="annuityJTextField">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="16" style="0"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="paymentTotalJLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Helvetica Neue" size="18" style="0"/>
+              <Font name="Helvetica Neue" size="20" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="Total Payments:"/>
@@ -484,13 +511,16 @@
         <Component class="javax.swing.JTextField" name="paymentTotalJTextField">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="16" style="0"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="interestTotalJLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Helvetica Neue" size="18" style="0"/>
+              <Font name="Helvetica Neue" size="20" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="Interest Earned:"/>
@@ -499,6 +529,9 @@
         <Component class="javax.swing.JTextField" name="interestTotalJTextField">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="16" style="0"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
           </Properties>
         </Component>

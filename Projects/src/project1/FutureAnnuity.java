@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package project1;
 
 import java.awt.Color;
@@ -12,39 +7,76 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JColorChooser;
+import javax.swing.JSpinner;
 
 
 /**
- *  ADD
- *  <p>
- *  Environment:    PC, Windows 10, JDK 1.8.0_151, NetBeans 8.2
- *  <p>
- *  Date:           1/15/2018 
- *  <p>
- *  History Log:    1/5/2018
- *  <p>
- *  @author         Koenn Becker
- *  @version        1.0.0
- */
+* This program calculates the annuity of an account given the payment per period,
+* interest rate, number of compounds per year, and amount of years to accumulate
+* annuity.
+* <p>
+* This program implements Swing for the GUI, it also uses a second
+* class called {@link project1.Annuity} that does the actual calculation.
+* <p>
+* <b>Class:</b>         FutureAnnuity
+* <p>
+* <b>File:</b>          FutureAnnuity.java
+* <p>
+* <b>Environment:</b>   PC, Windows 10, JDK 1.8.0_151, NetBeans 8.2
+* <p>
+* <b>Date:</b>          1/23/2018 
+* <p>
+* <b>History Log:</b>   1/5/2018, 1/8/2018, 1/10/2018, 1/17/2018, 1/19/2018, 1/21/2018, 
+*                       1/22/2018, 1/13/2018
+* <p>
+* @author               Koenn Becker
+* @version              1.0.0
+* @see                  project1.Annuity
+*/ 
 public class FutureAnnuity extends javax.swing.JFrame {
-
-
-    /**
-     * Creates new form FutureAnnuity
-     */
+    
+    // Constant declaration -- Class level so tooltips can access
+    final double MAX_PAYMENT = 100000;
+    final double MAX_INTEREST_RATE = 100;
+    final short MAX_COMPOUNDINGS = 365;        // For maximum of 1 compound per day
+    final double MAX_YEARS = 50;
+    
+    /**        
+    * <b>Constructor:</b>   FutureAnnuity
+    * <p>
+    * <b>Description:</b>   Calls the initComponents() method to initialize GUI components<br>
+    *                       Centers all forms and JDialogs using .setLocationRelativeTo<br>
+    *                       gets the current date using setDate() method and adds it to form title<br>
+    *                       Sets the default button for both the form and dialogs<br>
+    *                       Sets the icon for the form<br>
+    *                       Makes the interestJSpinner read only(text field is uneditable)
+    *                       and sets the focused field to be payment
+    * <p>
+    * <b>Date Created:</b>  1/10/2018   
+    * <p>
+    * @author               Koenn Becker
+    * @see                  #setDate() 
+    */
     public FutureAnnuity() {
+        
         initComponents();
         
-        this.setLocationRelativeTo(null);       // Centers forms
-        aboutJDialog.setLocationRelativeTo(null);       // Centers JDialog
+        /*~~~~~~~~~~~~~~~~~~~CENTERING SECTION~~~~~~~~~~~~~~~~~~~*/
+        this.setLocationRelativeTo(null);       // Centers main form
+        aboutJDialog.setLocationRelativeTo(null);       // Centers aboutJDialog
         settingsJDialog.setLocationRelativeTo(null);       // Centers settings JDialog
-        aboutJDialog.getRootPane().setDefaultButton(closeJButton);
-        this.getRootPane().setDefaultButton(calculateJButton); // Sets default button to calculate
+        
+        /*~~~~~~~~~~~~~~~~~~OTHER FORM SETTINGS~~~~~~~~~~~~~~~~~~*/
+        this.getRootPane().setDefaultButton(calculateJButton);      // Sets default button to calculate
+        aboutJDialog.getRootPane().setDefaultButton(closeJButton);  // Sets close to default button on about dialog
         
         // Set icon for form
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage("src/project1/Icon.png"));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("src/project1/Icon.png"));  
         
-        // Sets focused field
+        // Sets interest JSpinner to be read only
+        ((JSpinner.DefaultEditor)interestJSpinner.getEditor()).getTextField().setEditable(false);
+        
+        // Sets the focused field at startup
         paymentJTextField.requestFocus();
         
         // Sets current date and adds it to form title
@@ -53,23 +85,38 @@ public class FutureAnnuity extends javax.swing.JFrame {
     }
     
     /**        
-     *  Method          setDate()     
-     *  Description:    Creates new SimpleDateFormat<br>
-     *                  Sets date and then adds it to form title<br>
-     *  Date Created:   1/10/2018  
-     *  @author         Koenn Becker
-     *  @see            java.text.DateFormat
-     *  @see            java.text.SimpleDateFormat
-     *  @see            java.util.Date 
-     */ 
+    * <b>Method:</b>        setDate()
+    * <p>
+    * <b>Description:</b>   Creates new SimpleDateFormat<br>
+    *                       Sets date and then adds it to form title<br>
+    * <p>
+    * <b>Date Created:</b>  1/10/2018 
+    * <p>
+    * @author               Koenn Becker
+    * @see                  java.text.DateFormat
+    * @see                  java.text.SimpleDateFormat
+    * @see                  java.util.Date 
+    */ 
     private void setDate() {
         
+        // Creates new DateFormat
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         Date date = new Date();
+        // Adds date to the form title
         this.setTitle("Future Annuity -- " + dateFormat.format(date));
     
     }
     
+    /**        
+    * <b>Method:</b>        clearFields()
+    * <p>
+    * <b>Description:</b>   Clears all JTextFields and JSpinners and then resets 
+    *                       focus to payment JTextField
+    * <p>
+    * <b>Date Created:</b>  1/15/2018 
+    * <p>
+    * @author               Koenn Becker
+    */ 
     private void clearFields(){
         // Clears all text fields
         paymentJTextField.setText("");
@@ -79,7 +126,8 @@ public class FutureAnnuity extends javax.swing.JFrame {
         annuityJTextField.setText("");
         paymentTotalJTextField.setText("");
         interestTotalJTextField.setText("");
-        errorJLabel.setText("");
+        
+        errorJLabel.setText(""); //Clears error message
         
         // Resets focus to payment field
         paymentJTextField.requestFocus();
@@ -143,18 +191,19 @@ public class FutureAnnuity extends javax.swing.JFrame {
         aboutJDialog.setTitle("About -- Annuity Calculator");
         aboutJDialog.setBackground(new java.awt.Color(255, 255, 255));
         aboutJDialog.setIconImage(null);
+        aboutJDialog.setPreferredSize(new java.awt.Dimension(426, 600));
         aboutJDialog.setResizable(false);
-        aboutJDialog.setSize(new java.awt.Dimension(416, 510));
+        aboutJDialog.setSize(new java.awt.Dimension(426, 600));
         aboutJDialog.setType(java.awt.Window.Type.UTILITY);
 
         aboutJLabel.setFont(new java.awt.Font("Helvetica", 1, 36)); // NOI18N
         aboutJLabel.setForeground(new java.awt.Color(229, 152, 88));
         aboutJLabel.setText("About");
 
-        descriptionJLabel.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
-        descriptionJLabel.setText("<html>This program calculates the annuity of an account that has a fixed interest rate. You can enter the payment you will deposit each compound, the interest rate of your account, the number of compounds a year, and the number of years you plan on continuing this plan. Below is the formula used in this calculation:</html>");
+        descriptionJLabel.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        descriptionJLabel.setText("<html>This program calculates the annuity of an account that has a fixed interest rate. You can enter the payment you will deposit each period, the interest rate of your account, the number of compounds a year, and the number of years you plan on accumulating the annuity. Below is the formula used in this calculation:</html>");
 
-        detailsJLabel.setText("<html><h3>Version: 1.0.0</h3><h3>Developed by: Koenn Becker - 2018</h3></html>");
+        detailsJLabel.setText("<html><h2>Version: 1.0.0</h2><h2>Developed by: Koenn Becker - 2018</h2></html>");
 
         formulaPicJLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project1/formula1.png"))); // NOI18N
         formulaPicJLabel.setPreferredSize(new java.awt.Dimension(272, 189));
@@ -203,8 +252,8 @@ public class FutureAnnuity extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(detailsJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(closeJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                .addGap(18, 18, 18))
+                .addComponent(closeJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         settingsJDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -278,69 +327,77 @@ public class FutureAnnuity extends javax.swing.JFrame {
         inputJPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         inputJPanel.setLayout(new java.awt.GridLayout(4, 3, 10, 17));
 
-        paymentJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        paymentJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
         paymentJLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         paymentJLabel.setText("Periodic Payment:");
         inputJPanel.add(paymentJLabel);
 
+        paymentJTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         paymentJTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        paymentJTextField.setToolTipText("Must be greater than 0 ");
+        paymentJTextField.setToolTipText("Must be greater than 0 and less than " + MAX_PAYMENT);
         inputJPanel.add(paymentJTextField);
 
-        interestJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        interestJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
         interestJLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         interestJLabel.setText("Interest (as a %):");
         inputJPanel.add(interestJLabel);
 
+        interestJSpinner.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         interestJSpinner.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 1.0d));
         interestJSpinner.setToolTipText("Enter interest rate as percent (no % symbol)");
         interestJSpinner.setEditor(new javax.swing.JSpinner.NumberEditor(interestJSpinner, "0.00"));
         inputJPanel.add(interestJSpinner);
 
-        compoundsJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        compoundsJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
         compoundsJLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         compoundsJLabel.setText("Compunds per year:");
         inputJPanel.add(compoundsJLabel);
 
+        compoundsJTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         compoundsJTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        compoundsJTextField.setToolTipText("Must be between 1 and " + Validation.MAX_COMPOUNDINGS);
+        compoundsJTextField.setToolTipText("Must be between 1 and " + MAX_COMPOUNDINGS);
         inputJPanel.add(compoundsJTextField);
 
-        yearsJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        yearsJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
         yearsJLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         yearsJLabel.setText("Years:");
         inputJPanel.add(yearsJLabel);
 
+        yearsJTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         yearsJTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         yearsJTextField.setToolTipText("How many years the annuity will accumulate");
         inputJPanel.add(yearsJTextField);
 
+        outputJPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         outputJPanel.setLayout(new java.awt.GridLayout(3, 2, 10, 15));
 
-        annuityJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        annuityJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
         annuityJLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         annuityJLabel.setText("Future Annuity Balance:");
         outputJPanel.add(annuityJLabel);
 
         annuityJTextField.setEditable(false);
+        annuityJTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         annuityJTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         outputJPanel.add(annuityJTextField);
 
-        paymentTotalJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        paymentTotalJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
         paymentTotalJLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         paymentTotalJLabel.setText("Total Payments:");
         outputJPanel.add(paymentTotalJLabel);
 
         paymentTotalJTextField.setEditable(false);
+        paymentTotalJTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         paymentTotalJTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         outputJPanel.add(paymentTotalJTextField);
 
-        interestTotalJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        interestTotalJLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
         interestTotalJLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         interestTotalJLabel.setText("Interest Earned:");
         outputJPanel.add(interestTotalJLabel);
 
         interestTotalJTextField.setEditable(false);
+        interestTotalJTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         interestTotalJTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         outputJPanel.add(interestTotalJTextField);
 
@@ -457,16 +514,16 @@ public class FutureAnnuity extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(logoJLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(logoJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(outputJPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(calculateJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonsJPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(inputJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(errorJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addComponent(inputJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -488,66 +545,209 @@ public class FutureAnnuity extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**        
+    * <b>Method:</b>        clearJMenuItemActionPerformed()
+    * <p>
+    * <b>Description:</b>   Calls the clearFields() method to clear all fields when
+    *                       clear button is pressed.
+    * <p>
+    * <b>Date Created:</b>  1/10/2018 
+    * <p>
+    * @author               Koenn Becker
+    * @see                  #clearFields()
+    * @param                evt Unused.
+    */ 
     private void clearJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearJMenuItemActionPerformed
         // Clears all text fields
         clearFields();
     }//GEN-LAST:event_clearJMenuItemActionPerformed
 
+    /**        
+    * <b>Method:</b>        aboutJMenuItenActionPerformed()
+    * <p>
+    * <b>Description:</b>   Shows the aboutJDialog by setting it to visible.
+    * <p>
+    * <b>Date Created:</b>  1/15/2018 
+    * <p>
+    * @author               Koenn Becker
+    * @param                evt Unused.
+    */
     private void aboutJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutJMenuItemActionPerformed
-        aboutJDialog.setVisible(true);
-        
+        // Sets the aboutJDialog to visible
+        aboutJDialog.setVisible(true); 
     }//GEN-LAST:event_aboutJMenuItemActionPerformed
 
+    /**        
+    * <b>Method:</b>        calculateJButtonActionPerformed()
+    * <p>
+    * <b>Description:</b>   When the calculation button is pressed:<br>
+    *                       Invalid range booleans are declared (max range constants
+    *                       are declared in class level so tool tips can access them)<br>
+    *                       User inputs are assigned from text fields and spinners
+    *                       (converted to string type) to variables. This is done
+    *                       inside of a try/catch block to catch any NumberFormatExceptions
+    *                       that might be thrown for a mismatched type(I.e random letters).<br>
+    *                       If any invalid input booleans are true, a new NumberFormatException is thrown<br>
+    *                       If all inputs are good, a new Annuity object is created for calculation. 
+    *                       The output text fields then display the calculated values by
+    *                       calling methods from the {@link project1.Annuity} class
+    *                       using a DecimalFormat for money.
+    * <p>
+    *                       If a NumberFormatException is thrown:<br>
+    *                       A series of if statements will detect which input has
+    *                       a value out of the valid range and will display the 
+    *                       correct error message corresponding to the appropriate field.
+    *                       It will also set focus to and select all text inside the
+    *                       text field that has an invalid input.
+                 
+    * <p>
+    * <b>Date Created:</b>  1/10/2018 
+    * <p>
+    * @author               Koenn Becker
+    * @see                  #clearFields()
+    * @param                evt Unused.
+    * @see                  project1.Annuity
+    * @see                  java.text.DecimalFormat
+    */ 
     private void calculateJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateJButtonActionPerformed
-        // Reads inputs and stores them in variables, then applies the future annuity formula and displays the results
+
+        /*~~~~~~~~~~~~~~~~~~~DECLARATION SECTION~~~~~~~~~~~~~~~~~~~*/
         
         // Creates decimal format for money
         DecimalFormat moneyFormat = new DecimalFormat("$#,##0.00"); 
         
-        // Initializes ValidationResult objects
-        ValidationResult payment, interest, compounds, years;
+        // Boolean declaration
+        boolean paymentNotValid = false;
+        boolean interestNotValid = false;
+        boolean compoundsNotValid = false;
+        boolean yearsNotValid = false;
         
-        // Validates the following input fields by calling the Validation class which then returns the value into the objects below.
-        payment = Validation.validatePayment(paymentJTextField, errorJLabel);
-        interest = Validation.validateInterest(interestJSpinner, errorJLabel);
-        compounds = Validation.validateCompound(compoundsJTextField, errorJLabel);
-        years = Validation.validateYear(yearsJTextField, errorJLabel);
+        /*~~~~~~~~~~~~~~~~~~~END DECLARATION SECTION~~~~~~~~~~~~~~~~~~~*/
         
-        // Creates new Annuity object for the calculation
-        Annuity calculate = new Annuity(payment.value, interest.value, compounds.shrtValue, years.value);
-        
-        if (!payment.notValid && !interest.notValid && !compounds.notValid && !years.notValid){
+        try {       // Try/Catch blocks to detect NumberFormatException
+            
+            // Declares and assigns user input(converted to string type) to respective variables.
+            double payment = Double.parseDouble(paymentJTextField.getText());
+            double interest = Double.parseDouble(interestJSpinner.getValue().toString()) / 100; // Divided by zero to convert to decimal
+            short compounds = Short.parseShort(compoundsJTextField.getText());
+            double years = Double.parseDouble(yearsJTextField.getText());
+            
+            // Booleans to detect if input value is out of valid range
+            paymentNotValid = (payment <= 0 || payment > MAX_PAYMENT);
+            interestNotValid = (interest * 100 <= 0 || interest > MAX_INTEREST_RATE);
+            compoundsNotValid = (compounds <= 0 || compounds > MAX_COMPOUNDINGS);
+            yearsNotValid = (years <= 0 || years > MAX_YEARS);
+            
+            // Throws exception if any of the booleans above are true
+            if (paymentNotValid || interestNotValid || compoundsNotValid || yearsNotValid) {
+                throw new NumberFormatException();
+            }
+            else {      // Otherwise, proceeds with calculation
+            
+            // Clears the error label because inputs are valid
+            errorJLabel.setText("");
+            
+            // Creates new Annuity object for the calculation
+            Annuity calculate = new Annuity(payment, interest, compounds, years);
+    
             // Display annuity in output fields
-            annuityJTextField.setText(moneyFormat.format(calculate.calculateAnnuity()));
+            annuityJTextField.setText(moneyFormat.format(calculate.getAnnuity()));
             paymentTotalJTextField.setText(moneyFormat.format(calculate.getPayments()));
             interestTotalJTextField.setText(moneyFormat.format(calculate.getInterest()));
+            }
+
+        } catch (NumberFormatException e){  // This code block is ran if exception is detected
             
-            errorJLabel.setText("");
-        }
-        else {
-            annuityJTextField.setText("");
-            paymentTotalJTextField.setText("");
-            interestTotalJTextField.setText("");
+            if (yearsNotValid){
+               
+                errorJLabel.setText("<html>Please ensure that the years field has a value between 1 and "
+                    + MAX_YEARS + "</html>");
+                yearsJTextField.requestFocus();
+                yearsJTextField.selectAll();
+            }
+   
+            if (compoundsNotValid){
+                
+                errorJLabel.setText("<html>Please ensure that the compoundings field \n has a value between 1 and "
+                    + MAX_COMPOUNDINGS + "</html>");
+                compoundsJTextField.requestFocus();
+                compoundsJTextField.selectAll();
+            }
+            if (interestNotValid){
+                
+                errorJLabel.setText("Please ensure interest rate is greater than 0%");
+                interestJSpinner.requestFocus();
+            }
             
+            if (paymentNotValid){
+                errorJLabel.setText("<html>Please ensure that payment \n is greater than 0 and less than "
+                    + MAX_PAYMENT + "</html>.");
+                paymentJTextField.requestFocus();
+                paymentJTextField.selectAll();
+            }
+
         }
- 
+   
     }//GEN-LAST:event_calculateJButtonActionPerformed
 
+    /**        
+    * <b>Method:</b>        clearJButtonActionPerformed()
+    * <p>
+    * <b>Description:</b>   Calls the clearFields() method to clear all fields when
+    *                       clear button is pressed.
+    * <p>
+    * <b>Date Created:</b>  1/10/2018 
+    * <p>
+    * @author               Koenn Becker
+    * @see                  #clearFields()
+    * @param                evt Unused.
+    */
     private void clearJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearJButtonActionPerformed
         // Clears all text fields
        clearFields();
     }//GEN-LAST:event_clearJButtonActionPerformed
 
+    /**        
+    * <b>Method:</b>        quitJButtonActionPerformed()
+    * <p>
+    * <b>Description:</b>   Quits the application using System.exit(0)<br> 
+    *                       NOTE: 0 Is for successful termination
+    * <p>
+    * <b>Date Created:</b>  1/10/2018 
+    * <p>
+    * @author               Koenn Becker
+    * @param                evt Unused.
+    */
     private void quitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitJButtonActionPerformed
         // Quits the application
         System.exit(0);
     }//GEN-LAST:event_quitJButtonActionPerformed
 
+    /**        
+    * <b>Method:</b>        quitJMenuItemActionPerformed()
+    * <p>
+    * <b>Description:</b>   Calls the quitJButton event handler to quit the application.
+    * <p>
+    * <b>Date Created:</b>  1/10/2018 
+    * <p>
+    * @author               Koenn Becker
+    * @param                evt Unused.
+    */
     private void quitJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitJMenuItemActionPerformed
          // Quits the application
-        System.exit(0);
+        quitJButtonActionPerformed(evt);
     }//GEN-LAST:event_quitJMenuItemActionPerformed
 
+    /**        
+    * <b>Method:</b>        closeJButtonActionPerformed()
+    * <p>
+    * <b>Description:</b>   Closes the aboutJDialog using the .dispose() method
+    * <p>
+    * <b>Date Created:</b>  1/10/2018 
+    * <p>
+    * @author               Koenn Becker
+    * @param                evt Unused.
+    */
     private void closeJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeJButtonActionPerformed
         // Closes About dialog box
         aboutJDialog.dispose();
@@ -573,7 +773,7 @@ public class FutureAnnuity extends javax.swing.JFrame {
 
     /**        
      *  Method         main()    
-     *  Description:   Creates new {@link #loanGUI()} object and sets it to visible.
+     *  Description:   Pauses for 1400 milliseconds and then creates new object and sets it to visible.
      *  @param         args Unused.     
      *  @author        Koenn Becker   
      *  Date Created:  1/10/2018  
