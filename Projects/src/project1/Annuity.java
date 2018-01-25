@@ -70,7 +70,7 @@ public class Annuity {
     public double getAnnuity() {
         // Calculate annuity
         return payment * (Math.pow(1 + (interest / compounds), years * compounds) - 1) /
-                (interest / compounds);
+                        (interest / compounds);
       
     }
     

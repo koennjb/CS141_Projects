@@ -1,12 +1,10 @@
 package project1;
 
-import java.awt.Color;
 import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.swing.JColorChooser;
 import javax.swing.JSpinner;
 
 
@@ -36,10 +34,9 @@ import javax.swing.JSpinner;
 public class FutureAnnuity extends javax.swing.JFrame {
     
     // Constant declaration -- Class level so tooltips can access
-    final double MAX_PAYMENT = 100000;
-    final double MAX_INTEREST_RATE = 100;
+    final double MAX_PAYMENT = 1000000;
     final short MAX_COMPOUNDINGS = 365;        // For maximum of 1 compound per day
-    final double MAX_YEARS = 50;
+    final double MAX_YEARS = 100;
     
     /**        
     * <b>Constructor:</b>   FutureAnnuity
@@ -61,15 +58,12 @@ public class FutureAnnuity extends javax.swing.JFrame {
         
         initComponents();
         
-        /*~~~~~~~~~~~~~~~~~~~CENTERING SECTION~~~~~~~~~~~~~~~~~~~*/
-        this.setLocationRelativeTo(null);       // Centers main form
-        aboutJDialog.setLocationRelativeTo(null);       // Centers aboutJDialog
-        settingsJDialog.setLocationRelativeTo(null);       // Centers settings JDialog
+        // Centers main form
+        this.setLocationRelativeTo(null);       
         
-        /*~~~~~~~~~~~~~~~~~~OTHER FORM SETTINGS~~~~~~~~~~~~~~~~~~*/
-        this.getRootPane().setDefaultButton(calculateJButton);      // Sets default button to calculate
-        aboutJDialog.getRootPane().setDefaultButton(closeJButton);  // Sets close to default button on about dialog
-        
+        // Sets default button to calculate
+        this.getRootPane().setDefaultButton(calculateJButton);      
+ 
         // Set icon for form
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("src/project1/Icon.png"));  
         
@@ -110,10 +104,10 @@ public class FutureAnnuity extends javax.swing.JFrame {
     /**        
     * <b>Method:</b>        clearFields()
     * <p>
-    * <b>Description:</b>   Clears all JTextFields and JSpinners and then resets 
-    *                       focus to payment JTextField
+    * <b>Description:</b>   Clears all JTextFields, JSpinners and the error label, 
+    *                       then resets focus to payment JTextField
     * <p>
-    * <b>Date Created:</b>  1/15/2018 
+    * <b>Date Created:</b>  1/10/2018 
     * <p>
     * @author               Koenn Becker
     */ 
@@ -127,14 +121,12 @@ public class FutureAnnuity extends javax.swing.JFrame {
         paymentTotalJTextField.setText("");
         interestTotalJTextField.setText("");
         
-        errorJLabel.setText(""); //Clears error message
+        //Clears error message
+        errorJLabel.setText(""); 
         
         // Resets focus to payment field
         paymentJTextField.requestFocus();
     }
-    
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -145,16 +137,6 @@ public class FutureAnnuity extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        aboutJDialog = new javax.swing.JDialog();
-        aboutJLabel = new javax.swing.JLabel();
-        descriptionJLabel = new javax.swing.JLabel();
-        detailsJLabel = new javax.swing.JLabel();
-        formulaPicJLabel = new javax.swing.JLabel();
-        closeJButton = new javax.swing.JButton();
-        settingsJDialog = new javax.swing.JDialog();
-        settingsJLabel = new javax.swing.JLabel();
-        closeSettingsJButton = new javax.swing.JButton();
-        colorJButton = new javax.swing.JButton();
         logoJLabel = new javax.swing.JLabel();
         inputJPanel = new javax.swing.JPanel();
         paymentJLabel = new javax.swing.JLabel();
@@ -183,136 +165,8 @@ public class FutureAnnuity extends javax.swing.JFrame {
         clearJMenuItem = new javax.swing.JMenuItem();
         printJMenuItem = new javax.swing.JMenuItem();
         quitJMenuItem = new javax.swing.JMenuItem();
-        settingsJMenuItem = new javax.swing.JMenuItem();
         helpJMenu = new javax.swing.JMenu();
         aboutJMenuItem = new javax.swing.JMenuItem();
-
-        aboutJDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        aboutJDialog.setTitle("About -- Annuity Calculator");
-        aboutJDialog.setBackground(new java.awt.Color(255, 255, 255));
-        aboutJDialog.setIconImage(null);
-        aboutJDialog.setPreferredSize(new java.awt.Dimension(426, 600));
-        aboutJDialog.setResizable(false);
-        aboutJDialog.setSize(new java.awt.Dimension(426, 600));
-        aboutJDialog.setType(java.awt.Window.Type.UTILITY);
-
-        aboutJLabel.setFont(new java.awt.Font("Helvetica", 1, 36)); // NOI18N
-        aboutJLabel.setForeground(new java.awt.Color(229, 152, 88));
-        aboutJLabel.setText("About");
-
-        descriptionJLabel.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        descriptionJLabel.setText("<html>This program calculates the annuity of an account that has a fixed interest rate. You can enter the payment you will deposit each period, the interest rate of your account, the number of compounds a year, and the number of years you plan on accumulating the annuity. Below is the formula used in this calculation:</html>");
-
-        detailsJLabel.setText("<html><h2>Version: 1.0.0</h2><h2>Developed by: Koenn Becker - 2018</h2></html>");
-
-        formulaPicJLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project1/formula1.png"))); // NOI18N
-        formulaPicJLabel.setPreferredSize(new java.awt.Dimension(272, 189));
-        formulaPicJLabel.setRequestFocusEnabled(false);
-
-        closeJButton.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-        closeJButton.setMnemonic('R');
-        closeJButton.setText("Close");
-        closeJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                closeJButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout aboutJDialogLayout = new javax.swing.GroupLayout(aboutJDialog.getContentPane());
-        aboutJDialog.getContentPane().setLayout(aboutJDialogLayout);
-        aboutJDialogLayout.setHorizontalGroup(
-            aboutJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(aboutJDialogLayout.createSequentialGroup()
-                .addGap(156, 156, 156)
-                .addComponent(aboutJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(166, 166, 166))
-            .addGroup(aboutJDialogLayout.createSequentialGroup()
-                .addGroup(aboutJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(aboutJDialogLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(aboutJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(aboutJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(descriptionJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(detailsJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE))
-                            .addComponent(formulaPicJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(aboutJDialogLayout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addComponent(closeJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        aboutJDialogLayout.setVerticalGroup(
-            aboutJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(aboutJDialogLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(aboutJLabel)
-                .addGap(18, 18, 18)
-                .addComponent(descriptionJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(formulaPicJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(detailsJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(closeJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        settingsJDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        settingsJDialog.setTitle("About -- Annuity Calculator");
-        settingsJDialog.setBackground(new java.awt.Color(255, 255, 255));
-        settingsJDialog.setIconImage(null);
-        settingsJDialog.setResizable(false);
-        settingsJDialog.setSize(new java.awt.Dimension(416, 510));
-        settingsJDialog.setType(java.awt.Window.Type.UTILITY);
-
-        settingsJLabel.setFont(new java.awt.Font("Helvetica", 1, 36)); // NOI18N
-        settingsJLabel.setForeground(new java.awt.Color(229, 152, 88));
-        settingsJLabel.setText("Settings");
-
-        closeSettingsJButton.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-        closeSettingsJButton.setMnemonic('R');
-        closeSettingsJButton.setText("Close");
-        closeSettingsJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                closeSettingsJButtonActionPerformed(evt);
-            }
-        });
-
-        colorJButton.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-        colorJButton.setText("Change Color Scheme");
-        colorJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                colorJButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout settingsJDialogLayout = new javax.swing.GroupLayout(settingsJDialog.getContentPane());
-        settingsJDialog.getContentPane().setLayout(settingsJDialogLayout);
-        settingsJDialogLayout.setHorizontalGroup(
-            settingsJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(settingsJDialogLayout.createSequentialGroup()
-                .addGroup(settingsJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(settingsJDialogLayout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addComponent(closeSettingsJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(settingsJDialogLayout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(settingsJLabel))
-                    .addGroup(settingsJDialogLayout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(colorJButton)))
-                .addContainerGap(127, Short.MAX_VALUE))
-        );
-        settingsJDialogLayout.setVerticalGroup(
-            settingsJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(settingsJDialogLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(settingsJLabel)
-                .addGap(43, 43, 43)
-                .addComponent(colorJButton)
-                .addGap(301, 301, 301)
-                .addComponent(closeSettingsJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-                .addGap(18, 18, 18))
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Future Annuity");
@@ -332,7 +186,6 @@ public class FutureAnnuity extends javax.swing.JFrame {
         paymentJLabel.setText("Periodic Payment:");
         inputJPanel.add(paymentJLabel);
 
-        paymentJTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         paymentJTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         paymentJTextField.setToolTipText("Must be greater than 0 and less than " + MAX_PAYMENT);
         inputJPanel.add(paymentJTextField);
@@ -342,7 +195,6 @@ public class FutureAnnuity extends javax.swing.JFrame {
         interestJLabel.setText("Interest (as a %):");
         inputJPanel.add(interestJLabel);
 
-        interestJSpinner.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         interestJSpinner.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 1.0d));
         interestJSpinner.setToolTipText("Enter interest rate as percent (no % symbol)");
         interestJSpinner.setEditor(new javax.swing.JSpinner.NumberEditor(interestJSpinner, "0.00"));
@@ -353,7 +205,6 @@ public class FutureAnnuity extends javax.swing.JFrame {
         compoundsJLabel.setText("Compunds per year:");
         inputJPanel.add(compoundsJLabel);
 
-        compoundsJTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         compoundsJTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         compoundsJTextField.setToolTipText("Must be between 1 and " + MAX_COMPOUNDINGS);
         inputJPanel.add(compoundsJTextField);
@@ -363,7 +214,6 @@ public class FutureAnnuity extends javax.swing.JFrame {
         yearsJLabel.setText("Years:");
         inputJPanel.add(yearsJLabel);
 
-        yearsJTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         yearsJTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         yearsJTextField.setToolTipText("How many years the annuity will accumulate");
         inputJPanel.add(yearsJTextField);
@@ -377,7 +227,7 @@ public class FutureAnnuity extends javax.swing.JFrame {
         outputJPanel.add(annuityJLabel);
 
         annuityJTextField.setEditable(false);
-        annuityJTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        annuityJTextField.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         annuityJTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         outputJPanel.add(annuityJTextField);
 
@@ -387,7 +237,7 @@ public class FutureAnnuity extends javax.swing.JFrame {
         outputJPanel.add(paymentTotalJLabel);
 
         paymentTotalJTextField.setEditable(false);
-        paymentTotalJTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        paymentTotalJTextField.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         paymentTotalJTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         outputJPanel.add(paymentTotalJTextField);
 
@@ -397,7 +247,7 @@ public class FutureAnnuity extends javax.swing.JFrame {
         outputJPanel.add(interestTotalJLabel);
 
         interestTotalJTextField.setEditable(false);
-        interestTotalJTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        interestTotalJTextField.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         interestTotalJTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         outputJPanel.add(interestTotalJTextField);
 
@@ -406,7 +256,7 @@ public class FutureAnnuity extends javax.swing.JFrame {
         errorJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         calculateJButton.setBackground(new java.awt.Color(232, 104, 0));
-        calculateJButton.setFont(new java.awt.Font("Alcubierre", 0, 18)); // NOI18N
+        calculateJButton.setFont(new java.awt.Font("Alcubierre", 0, 24)); // NOI18N
         calculateJButton.setMnemonic('C');
         calculateJButton.setText("Calculate");
         calculateJButton.setToolTipText("Calculates total annuity");
@@ -419,8 +269,8 @@ public class FutureAnnuity extends javax.swing.JFrame {
         buttonsJPanel.setLayout(new java.awt.GridLayout(1, 3, 20, 0));
 
         clearJButton.setBackground(new java.awt.Color(239, 197, 162));
-        clearJButton.setFont(new java.awt.Font("Alcubierre", 0, 18)); // NOI18N
-        clearJButton.setMnemonic('R');
+        clearJButton.setFont(new java.awt.Font("Alcubierre", 0, 24)); // NOI18N
+        clearJButton.setMnemonic('L');
         clearJButton.setText("Clear");
         clearJButton.setToolTipText("Clear all text fields");
         clearJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -430,14 +280,20 @@ public class FutureAnnuity extends javax.swing.JFrame {
         });
         buttonsJPanel.add(clearJButton);
 
-        printJButton.setFont(new java.awt.Font("Alcubierre", 0, 18)); // NOI18N
+        printJButton.setBackground(new java.awt.Color(239, 197, 162));
+        printJButton.setFont(new java.awt.Font("Alcubierre", 0, 24)); // NOI18N
         printJButton.setMnemonic('P');
         printJButton.setText("Print");
-        printJButton.setEnabled(false);
+        printJButton.setToolTipText("Prints the GUI");
+        printJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printJButtonActionPerformed(evt);
+            }
+        });
         buttonsJPanel.add(printJButton);
 
         quitJButton.setBackground(new java.awt.Color(239, 197, 162));
-        quitJButton.setFont(new java.awt.Font("Alcubierre", 0, 18)); // NOI18N
+        quitJButton.setFont(new java.awt.Font("Alcubierre", 0, 24)); // NOI18N
         quitJButton.setMnemonic('Q');
         quitJButton.setText("Quit");
         quitJButton.setToolTipText("Quit the application");
@@ -450,7 +306,6 @@ public class FutureAnnuity extends javax.swing.JFrame {
 
         fileJMenu.setMnemonic('F');
         fileJMenu.setText("File");
-        fileJMenu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         clearJMenuItem.setMnemonic('C');
         clearJMenuItem.setText("Clear");
@@ -465,8 +320,12 @@ public class FutureAnnuity extends javax.swing.JFrame {
 
         printJMenuItem.setMnemonic('P');
         printJMenuItem.setText("Print");
-        printJMenuItem.setEnabled(false);
         printJMenuItem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        printJMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printJMenuItemActionPerformed(evt);
+            }
+        });
         fileJMenu.add(printJMenuItem);
 
         quitJMenuItem.setMnemonic('Q');
@@ -479,22 +338,11 @@ public class FutureAnnuity extends javax.swing.JFrame {
         });
         fileJMenu.add(quitJMenuItem);
 
-        settingsJMenuItem.setMnemonic('C');
-        settingsJMenuItem.setText("Settings");
-        settingsJMenuItem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        settingsJMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                settingsJMenuItemActionPerformed(evt);
-            }
-        });
-        fileJMenu.add(settingsJMenuItem);
-
         JMenuBar.add(fileJMenu);
 
         helpJMenu.setMnemonic('H');
         helpJMenu.setText("Help");
         helpJMenu.setToolTipText("Need some help?");
-        helpJMenu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         aboutJMenuItem.setMnemonic('A');
         aboutJMenuItem.setText("About");
@@ -565,16 +413,19 @@ public class FutureAnnuity extends javax.swing.JFrame {
     /**        
     * <b>Method:</b>        aboutJMenuItenActionPerformed()
     * <p>
-    * <b>Description:</b>   Shows the aboutJDialog by setting it to visible.
-    * <p>
-    * <b>Date Created:</b>  1/15/2018 
+    * <b>Description:</b>   Constructs a new About JDialog and sets
+                            it to be visible
+    <p>
+    * <b>Date Created:</b>  1/24/2018 
     * <p>
     * @author               Koenn Becker
     * @param                evt Unused.
+    * @see                  project1.About
     */
     private void aboutJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutJMenuItemActionPerformed
-        // Sets the aboutJDialog to visible
-        aboutJDialog.setVisible(true); 
+        // Creates a new About JDialog
+        About futureAnnuityAbout = new About(this, true);
+        futureAnnuityAbout.setVisible(true);
     }//GEN-LAST:event_aboutJMenuItemActionPerformed
 
     /**        
@@ -583,8 +434,8 @@ public class FutureAnnuity extends javax.swing.JFrame {
     * <b>Description:</b>   When the calculation button is pressed:<br>
     *                       Invalid range booleans are declared (max range constants
     *                       are declared in class level so tool tips can access them)<br>
-    *                       User inputs are assigned from text fields and spinners
-    *                       (converted to string type) to variables. This is done
+    *                       User inputs are assigned to variables from text fields and spinners
+    *                       (converted to string type). This is done
     *                       inside of a try/catch block to catch any NumberFormatExceptions
     *                       that might be thrown for a mismatched type(I.e random letters).<br>
     *                       If any invalid input booleans are true, a new NumberFormatException is thrown<br>
@@ -601,7 +452,7 @@ public class FutureAnnuity extends javax.swing.JFrame {
     *                       text field that has an invalid input.
                  
     * <p>
-    * <b>Date Created:</b>  1/10/2018 
+    * <b>Date Created:</b>  1/15/2018 
     * <p>
     * @author               Koenn Becker
     * @see                  #clearFields()
@@ -616,7 +467,7 @@ public class FutureAnnuity extends javax.swing.JFrame {
         // Creates decimal format for money
         DecimalFormat moneyFormat = new DecimalFormat("$#,##0.00"); 
         
-        // Boolean declaration
+        // Boolean declaration -- set to false to start 
         boolean paymentNotValid = false;
         boolean interestNotValid = false;
         boolean compoundsNotValid = false;
@@ -624,7 +475,8 @@ public class FutureAnnuity extends javax.swing.JFrame {
         
         /*~~~~~~~~~~~~~~~~~~~END DECLARATION SECTION~~~~~~~~~~~~~~~~~~~*/
         
-        try {       // Try/Catch blocks to detect NumberFormatException
+        try 
+        {       // Try/Catch blocks to detect NumberFormatException
             
             // Declares and assigns user input(converted to string type) to respective variables.
             double payment = Double.parseDouble(paymentJTextField.getText());
@@ -634,23 +486,25 @@ public class FutureAnnuity extends javax.swing.JFrame {
             
             // Booleans to detect if input value is out of valid range
             paymentNotValid = (payment <= 0 || payment > MAX_PAYMENT);
-            interestNotValid = (interest * 100 <= 0 || interest > MAX_INTEREST_RATE);
+            interestNotValid = (interest <= 0);
             compoundsNotValid = (compounds <= 0 || compounds > MAX_COMPOUNDINGS);
             yearsNotValid = (years <= 0 || years > MAX_YEARS);
             
             // Throws exception if any of the booleans above are true
-            if (paymentNotValid || interestNotValid || compoundsNotValid || yearsNotValid) {
+            if (paymentNotValid || interestNotValid || compoundsNotValid || yearsNotValid) 
+            {
                 throw new NumberFormatException();
-            }
-            else {      // Otherwise, proceeds with calculation
+                
+            } else {      // Otherwise, proceeds with calculation
             
             // Clears the error label because inputs are valid
             errorJLabel.setText("");
             
-            // Creates new Annuity object for the calculation
+            /* Creates new Annuity object for the calculation -- Passes variables
+               assigned to user's input above*/
             Annuity calculate = new Annuity(payment, interest, compounds, years);
-    
-            // Display annuity in output fields
+
+            // Display annuity in output fields -- Calls methods from Annuity class
             annuityJTextField.setText(moneyFormat.format(calculate.getAnnuity()));
             paymentTotalJTextField.setText(moneyFormat.format(calculate.getPayments()));
             interestTotalJTextField.setText(moneyFormat.format(calculate.getInterest()));
@@ -658,38 +512,44 @@ public class FutureAnnuity extends javax.swing.JFrame {
 
         } catch (NumberFormatException e){  // This code block is ran if exception is detected
             
-            if (yearsNotValid){
+            if (paymentNotValid || paymentJTextField.getText().isEmpty()) 
+            {
+                    errorJLabel.setText("<html>Please ensure that payment \n is greater than 0 and less than "
+                        + MAX_PAYMENT + "</html>.");
+                    paymentJTextField.requestFocus();
+                    paymentJTextField.selectAll();
+            } else 
+            if (interestNotValid) 
+            {
+                errorJLabel.setText("Please ensure interest rate is greater than 0%");
+                interestJSpinner.requestFocus();
+                
+            } else   
+            if (compoundsNotValid || compoundsJTextField.getText().isEmpty()) 
+            {
+                
+                errorJLabel.setText("<html>Please ensure that the compoundings field \n has a value between 1 and "
+                + MAX_COMPOUNDINGS + "</html>");
+                compoundsJTextField.requestFocus();
+                compoundsJTextField.selectAll();
+                
+            } else
+            if (yearsNotValid || yearsJTextField.getText().isEmpty()) 
+            {
                
                 errorJLabel.setText("<html>Please ensure that the years field has a value between 1 and "
                     + MAX_YEARS + "</html>");
                 yearsJTextField.requestFocus();
                 yearsJTextField.selectAll();
-            }
-   
-            if (compoundsNotValid){
                 
-                errorJLabel.setText("<html>Please ensure that the compoundings field \n has a value between 1 and "
-                    + MAX_COMPOUNDINGS + "</html>");
-                compoundsJTextField.requestFocus();
-                compoundsJTextField.selectAll();
-            }
-            if (interestNotValid){
-                
-                errorJLabel.setText("Please ensure interest rate is greater than 0%");
-                interestJSpinner.requestFocus();
-            }
             
-            if (paymentNotValid){
-                errorJLabel.setText("<html>Please ensure that payment \n is greater than 0 and less than "
-                    + MAX_PAYMENT + "</html>.");
+            } else {  // If no input range is invalid as tested above, display error message for NumberFormatException
+                errorJLabel.setText("Please ensure that no characters are entered into any fields!");
                 paymentJTextField.requestFocus();
-                paymentJTextField.selectAll();
             }
-
         }
-   
     }//GEN-LAST:event_calculateJButtonActionPerformed
-
+    /*~~~~~~~~~~~~~~~~~~~END OF CALCULATION METHOD~~~~~~~~~~~~~~~~~~~*/
     /**        
     * <b>Method:</b>        clearJButtonActionPerformed()
     * <p>
@@ -739,41 +599,41 @@ public class FutureAnnuity extends javax.swing.JFrame {
     }//GEN-LAST:event_quitJMenuItemActionPerformed
 
     /**        
-    * <b>Method:</b>        closeJButtonActionPerformed()
+    * <b>Method:</b>        printJButtonActionPerformed()
     * <p>
-    * <b>Description:</b>   Closes the aboutJDialog using the .dispose() method
+    * <b>Description:</b>   Uses PrintUtilities by Marty Hall to print the whole frame
     * <p>
-    * <b>Date Created:</b>  1/10/2018 
+    * <b>Date Created:</b>  1/22/2018 
     * <p>
     * @author               Koenn Becker
+    * @see                  project1.PrintUtilities
     * @param                evt Unused.
     */
-    private void closeJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeJButtonActionPerformed
-        // Closes About dialog box
-        aboutJDialog.dispose();
-    }//GEN-LAST:event_closeJButtonActionPerformed
+    private void printJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printJButtonActionPerformed
+        // Prints the form
+        PrintUtilities.printComponent(this);
+    }//GEN-LAST:event_printJButtonActionPerformed
 
-    private void settingsJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsJMenuItemActionPerformed
-        settingsJDialog.setVisible(true);
-    }//GEN-LAST:event_settingsJMenuItemActionPerformed
-
-    private void closeSettingsJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeSettingsJButtonActionPerformed
-        settingsJDialog.dispose();
-    }//GEN-LAST:event_closeSettingsJButtonActionPerformed
-
-    private void colorJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJButtonActionPerformed
-        Color newColor = JColorChooser.showDialog(settingsJDialog, "Choose a color", inputJPanel.getBackground());
-        if (newColor != null){
-            inputJPanel.setBackground(newColor);
-            calculateJButton.setBackground(newColor);
-            clearJButton.setBackground(newColor);
-            quitJButton.setBackground(newColor);    
-        }
-    }//GEN-LAST:event_colorJButtonActionPerformed
+    /**        
+    * <b>Method:</b>        printJMenuItemActionPerformed()
+    * <p>
+    * <b>Description:</b>   Calls the event handler for printJButton which prints the whole form
+    * <p>
+    * <b>Date Created:</b>  1/22/2018 
+    * <p>
+    * @author               Koenn Becker
+    * @see                  project1.PrintUtilities
+    * @see                  #printJButtonActionPerformed(java.awt.event.ActionEvent) 
+    * @param                evt Unused.
+    */
+    private void printJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printJMenuItemActionPerformed
+        // Calls printButton event handler to print form
+        printJButtonActionPerformed(evt);
+    }//GEN-LAST:event_printJMenuItemActionPerformed
 
     /**        
      *  Method         main()    
-     *  Description:   Pauses for 1400 milliseconds and then creates new object and sets it to visible.
+     *  Description:   Pauses for 1400 milliseconds and then creates new Form and sets it to visible.
      *  @param         args Unused.     
      *  @author        Koenn Becker   
      *  Date Created:  1/10/2018  
@@ -804,6 +664,7 @@ public class FutureAnnuity extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 
                 // Halts the running thread for length of splash screen gif in milliseconds
@@ -820,8 +681,6 @@ public class FutureAnnuity extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar JMenuBar;
-    private javax.swing.JDialog aboutJDialog;
-    private javax.swing.JLabel aboutJLabel;
     private javax.swing.JMenuItem aboutJMenuItem;
     private javax.swing.JLabel annuityJLabel;
     private javax.swing.JTextField annuityJTextField;
@@ -829,16 +688,10 @@ public class FutureAnnuity extends javax.swing.JFrame {
     private javax.swing.JButton calculateJButton;
     private javax.swing.JButton clearJButton;
     private javax.swing.JMenuItem clearJMenuItem;
-    private javax.swing.JButton closeJButton;
-    private javax.swing.JButton closeSettingsJButton;
-    private javax.swing.JButton colorJButton;
     private javax.swing.JLabel compoundsJLabel;
     private javax.swing.JTextField compoundsJTextField;
-    private javax.swing.JLabel descriptionJLabel;
-    private javax.swing.JLabel detailsJLabel;
     private javax.swing.JLabel errorJLabel;
     private javax.swing.JMenu fileJMenu;
-    private javax.swing.JLabel formulaPicJLabel;
     private javax.swing.JMenu helpJMenu;
     private javax.swing.JPanel inputJPanel;
     private javax.swing.JLabel interestJLabel;
@@ -855,9 +708,6 @@ public class FutureAnnuity extends javax.swing.JFrame {
     private javax.swing.JMenuItem printJMenuItem;
     private javax.swing.JButton quitJButton;
     private javax.swing.JMenuItem quitJMenuItem;
-    private javax.swing.JDialog settingsJDialog;
-    private javax.swing.JLabel settingsJLabel;
-    private javax.swing.JMenuItem settingsJMenuItem;
     private javax.swing.JLabel yearsJLabel;
     private javax.swing.JTextField yearsJTextField;
     // End of variables declaration//GEN-END:variables
